@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="btn_width">100dp</dimen>
+    <dimen name="bt_height">100dp</dimen>
+
+    <dimen name="height_splash_skyline_bottom">30.0dip</dimen>
+    <dimen name="height_tour_options">180.0dip</dimen>
+    <dimen name="height_welcome_logo">200.0dip</dimen>
+    <dimen name="padding_splash_image_logo_bottom">100.0dip</dimen>
+    <dimen name="margin_view">15.0dip</dimen>
+    <dimen name="margin_view_small">5.0dip</dimen>
+    <dimen name="textsize_view_medium">14.0dip</dimen>
+    <dimen name="textsize_view_small">12.0dip</dimen>
+
+</resources>
