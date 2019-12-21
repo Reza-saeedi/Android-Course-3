@@ -28,7 +28,7 @@ public class MyButton extends AppCompatButton {
     @Override
     public void setOnClickListener(@Nullable OnClickListener l) {
         super.setOnClickListener(l);
-        setText("test");
+        //setText("test");
     }
 
     @Override

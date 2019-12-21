@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Android Course</string>
     <string name="btn_text">test</string>
+    <string name="open_map">Open Map</string>
+    <string name="text_intent">text intent</string>
+    <string name="share_using">Select</string>
+    <string name="login">Login</string>
 </resources>

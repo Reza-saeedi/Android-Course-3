@@ -12,30 +12,45 @@
         tools:context=".MainActivity">
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/et_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPassword" />
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
+            android:background="@drawable/btn_background"
+            android:text="@string/login" />
+
 
         <TextView
+            android:id="@+id/tv_extra"
             style="@style/AppTheme.Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
             android:background="#FFEB3B"
             android:padding="10dp"
+            android:layout_margin="10dp"
             android:text="Hello World!" />
 
-        <ir.gov.siri.app.MyButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:count="1000"
-            android:text="@string/btn_text" />
+
 
         <Button
-            android:id="@+id/btn_sad"
+            android:id="@+id/btn_text_intent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="30dp"
+            android:background="@drawable/btn_background"
+            android:text="@string/text_intent" />
+
+        <Button
+            android:id="@+id/btn_intent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -48,6 +63,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:src="@mipmap/ic_launcher" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="20dp"
+            android:src="@drawable/animation_drawable" />
 
         <EditText
             android:layout_width="match_parent"
@@ -55,5 +76,13 @@
             android:hint="@string/app_name">
 
         </EditText>
+
+        <ir.gov.siri.app.MyButton
+            android:id="@+id/btn_map"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:count="1000"
+            android:background="@drawable/btn_background"
+            android:text="@string/open_map" />
     </LinearLayout>
 </ScrollView>
