@@ -52,7 +52,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         AlphaAnimation alphaAnimation=new AlphaAnimation(0,1);
         alphaAnimation.setDuration(1000);
-        alphaAnimation.setStartOffset(2000);
+       // alphaAnimation.setStartOffset(2000);
 
        /* imageView.setAnimation(scaleAnimation);
         imageView.setAnimation(alphaAnimation);*/
@@ -76,9 +76,11 @@ public class SplashScreenActivity extends AppCompatActivity {
 
 
 
+    }
 
-
-
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
     }
 
     @Override

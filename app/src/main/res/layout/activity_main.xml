@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/ll_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -44,7 +45,7 @@
             android:id="@+id/btn_text_intent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
+            android:layout_gravity="center"
             android:layout_margin="30dp"
             android:background="@drawable/btn_background"
             android:text="@string/text_intent" />
@@ -53,7 +54,7 @@
             android:id="@+id/btn_intent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
+            android:layout_gravity="center"
             android:layout_margin="30dp"
             android:background="@drawable/btn_background"
             android:text="@string/btn_text" />
@@ -68,14 +69,34 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="20dp"
+            android:visibility="gone"
             android:src="@drawable/animation_drawable" />
 
-        <EditText
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btn_toast"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/app_name">
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
+            android:background="@drawable/btn_background"
+            android:text="@string/toast" />
 
-        </EditText>
+        <Button
+            android:id="@+id/btn_snackbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
+            android:background="@drawable/btn_background"
+            android:text="@string/snackbar" />
+        <Button
+            android:id="@+id/btn_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
+            android:background="@drawable/btn_background"
+            android:text="@string/dialog" />
 
         <ir.gov.siri.app.MyButton
             android:id="@+id/btn_map"
@@ -85,4 +106,5 @@
             android:background="@drawable/btn_background"
             android:text="@string/open_map" />
     </LinearLayout>
+
 </ScrollView>

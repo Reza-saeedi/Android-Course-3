@@ -5,4 +5,20 @@
     <string name="text_intent">text intent</string>
     <string name="share_using">Select</string>
     <string name="login">Login</string>
+    <string name="toast">toast</string>
+    <string name="toast_message">hi toast</string>
+    <string name="dialog_message">Hi dialog</string>
+    <string name="exit_toast_message">Exit??</string>
+    <string name="snackbar">Snackbar</string>
+    <string name="OK">ok</string>
+    <string name="cancel">cancel</string>
+    <string name="dialog">dialog</string>
+
+    <array name="Dialog_list">
+        <item>item 1</item>
+        <item>item 2</item>
+        <item>item 3</item>
+        <item>item 3</item>
+    </array>
+
 </resources>
