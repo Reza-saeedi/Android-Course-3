@@ -17,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import ir.gov.siri.app.Contact.ContactActivity;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Toast exitToast;
@@ -64,6 +66,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Button btn_dialog=findViewById(R.id.btn_dialog);
         btn_dialog.setOnClickListener(this);
+
+        Button btnContactList=findViewById(R.id.btn_contact_activity);
+        btnContactList.setOnClickListener(this);
 
        /* FrameLayout frameLayout=new FrameLayout(this);
         frameLayout.setBackgroundColor(getResources().getColor(R.color.colorAccent));
@@ -165,6 +170,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             dialog.setNeutralButton(R.string.app_name,null);
             dialog.show();
+        }else if(v.getId()==R.id.btn_contact_activity)
+        {
+            Intent intent=new Intent(MainActivity.this, ContactActivity.class);
+            startActivity(intent);
         }
     }
 

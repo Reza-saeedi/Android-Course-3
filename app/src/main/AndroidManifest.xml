@@ -26,6 +26,8 @@
                 <data android:mimeType="text/plain"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".Contact.ContactActivity"/>
     </application>
 
 </manifest>

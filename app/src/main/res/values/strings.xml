@@ -13,6 +13,7 @@
     <string name="OK">ok</string>
     <string name="cancel">cancel</string>
     <string name="dialog">dialog</string>
+    <string name="contactList">show contact list</string>
 
     <array name="Dialog_list">
         <item>item 1</item>

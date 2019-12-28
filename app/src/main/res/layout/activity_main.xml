@@ -98,6 +98,16 @@
             android:background="@drawable/btn_background"
             android:text="@string/dialog" />
 
+
+        <Button
+            android:id="@+id/btn_contact_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
+            android:background="@drawable/btn_background"
+            android:text="@string/contactList" />
+
         <ir.gov.siri.app.MyButton
             android:id="@+id/btn_map"
             android:layout_width="match_parent"
