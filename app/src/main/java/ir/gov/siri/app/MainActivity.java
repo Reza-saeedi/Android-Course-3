@@ -5,7 +5,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.ActionMode;
+import android.view.ContextMenu;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +18,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.appcompat.widget.SearchView;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -69,6 +75,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Button btnContactList=findViewById(R.id.btn_contact_activity);
         btnContactList.setOnClickListener(this);
+
+        Button btnMenu=findViewById(R.id.btn_menu);
+        btnMenu.setOnClickListener(this);
+        registerForContextMenu(btnMenu);
 
        /* FrameLayout frameLayout=new FrameLayout(this);
         frameLayout.setBackgroundColor(getResources().getColor(R.color.colorAccent));
@@ -174,7 +184,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             Intent intent=new Intent(MainActivity.this, ContactActivity.class);
             startActivity(intent);
+        }else if(v.getId()==R.id.btn_menu)
+        {
+            PopupMenu popupMenu=new PopupMenu(MainActivity.this,v);
+            popupMenu.getMenuInflater().inflate(R.menu.main_menu,popupMenu.getMenu());
+            popupMenu.show();
         }
+
+        SearchView s
     }
 
     @Override
@@ -188,5 +205,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             exitToast.show();
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        getMenuInflater().inflate(R.menu.main_menu,menu);
+        super.onCreateContextMenu(menu, v, menuInfo);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.item1)
+        {
+            startActionMode(new ActionMode.Callback() {
+                @Override
+                public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                    getMenuInflater().inflate(R.menu.main_menu,menu);
+                    return true;
+                }
+
+                @Override
+                public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                    return false;
+                }
+
+                @Override
+                public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                    return false;
+                }
+
+                @Override
+                public void onDestroyActionMode(ActionMode mode) {
+
+                }
+            });
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

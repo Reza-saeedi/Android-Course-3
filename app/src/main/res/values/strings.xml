@@ -14,6 +14,7 @@
     <string name="cancel">cancel</string>
     <string name="dialog">dialog</string>
     <string name="contactList">show contact list</string>
+    <string name="Menu">Menu</string>
 
     <array name="Dialog_list">
         <item>item 1</item>

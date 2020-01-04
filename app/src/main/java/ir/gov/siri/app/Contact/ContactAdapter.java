@@ -8,9 +8,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 import ir.gov.siri.app.R;
 
 public class ContactAdapter extends RecyclerView.Adapter {
+
+    List<Contact> contacts;
+    ContactDelegate delegate;
+
+    public  ContactAdapter(List<Contact> contacts,ContactDelegate delegate)
+    {
+        this.contacts=contacts;
+        this.delegate=delegate;
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -27,6 +39,16 @@ public class ContactAdapter extends RecyclerView.Adapter {
             default:
                 return new TextCell(textView);
         }
+
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                delegate.onClick(v,contacts.get(Integer.parseInt((String)v.getTag())));
+                v.getTag();
+                //Toast.makeText(v.getContext(),"setOnClickListener"+v.getTag(),Toast.LENGTH_LONG)  .show();
+            }
+        });
         return new ContactCell(view);
     }
 
@@ -35,9 +57,11 @@ public class ContactAdapter extends RecyclerView.Adapter {
         switch (holder.getItemViewType()) {
             case 0:
             case 1:
+
                 ContactCell contactCell = (ContactCell) holder;
-                contactCell.setName("item : " + position);
-                contactCell.setPhone("0912222222" + position);
+                contactCell.setTag(position + "");
+                contactCell.setName(contacts.get(position).getName()+" "+contacts.get(position).getFamily());
+                contactCell.setPhone(contacts.get(position).getPhone());
                 break;
             default:
                 TextCell textCell = (TextCell) holder;
@@ -49,7 +73,7 @@ public class ContactAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 20;
+        return contacts.size();
     }
 
     @Override
