@@ -17,7 +17,15 @@ public class ContactAdapter extends RecyclerView.Adapter {
     List<Contact> contacts;
     ContactDelegate delegate;
 
-    public  ContactAdapter(List<Contact> contacts,ContactDelegate delegate)
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
+    }
+
+    public void deleteContacts(Contact contact) {
+        this.contacts.remove(contact);
+    }
+
+    public  ContactAdapter(List<Contact> contacts, ContactDelegate delegate)
     {
         this.contacts=contacts;
         this.delegate=delegate;
@@ -47,6 +55,12 @@ public class ContactAdapter extends RecyclerView.Adapter {
                 delegate.onClick(v,contacts.get(Integer.parseInt((String)v.getTag())));
                 v.getTag();
                 //Toast.makeText(v.getContext(),"setOnClickListener"+v.getTag(),Toast.LENGTH_LONG)  .show();
+            }
+        });
+        view.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return delegate.onLongClick(v,contacts.get(Integer.parseInt((String)v.getTag())));
             }
         });
         return new ContactCell(view);

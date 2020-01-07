@@ -14,6 +14,7 @@
         <item name="colorPrimary">@color/btn_color</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowActionModeOverlay">true</item>
     </style>
 
     <style name="AppTheme.Text" parent="Widget.AppCompat.TextView">

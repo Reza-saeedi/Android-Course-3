@@ -1,5 +1,6 @@
 package ir.gov.siri.app.Contact;
 
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -22,6 +23,14 @@ public class ContactCell extends RecyclerView.ViewHolder {
         textviewPhone= itemView.findViewById(R.id.tv_phone);
         imageView=itemView.findViewById(R.id.iv_contact);
         parent=itemView;
+
+        imageView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
+
 
     }
 
