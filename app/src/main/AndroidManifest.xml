@@ -7,16 +7,18 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CoordinatorActivity"
-            android:theme="@style/SplashTheme"></activity>
+        <activity android:name=".ViewPager.ViewPagerActivity"></activity>
+        <activity
+            android:name=".CoordinatorActivity"
+            android:theme="@style/SplashTheme" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/SplashTheme"></activity>
+            android:theme="@style/SplashTheme" />
         <activity
             android:name=".SplashScreenActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +26,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".IntentActivity">
+        <activity
+            android:name=".IntentActivity"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
 
@@ -33,7 +37,10 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-        <activity android:name=".Contact.ContactActivity" />
+        <activity android:name=".Fragment.FragmentActivity"></activity>
+        <activity
+            android:name=".Contact.ContactActivity"
+            android:configChanges="orientation|screenSize" />
     </application>
 
 </manifest>

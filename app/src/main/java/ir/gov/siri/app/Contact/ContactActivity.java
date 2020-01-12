@@ -1,11 +1,13 @@
 package ir.gov.siri.app.Contact;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
@@ -42,6 +44,8 @@ public class ContactActivity extends AppCompatActivity implements ContactDelegat
 
 
     }
+
+
 
     @Override
     public void onClick( View v,Contact contact) {
@@ -108,5 +112,20 @@ public class ContactActivity extends AppCompatActivity implements ContactDelegat
 
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 }

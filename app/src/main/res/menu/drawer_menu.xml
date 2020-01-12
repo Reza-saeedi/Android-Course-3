@@ -9,7 +9,10 @@
     <item
         android:title="Coordinator Layout"
         android:id="@+id/coordinator_menu"/>
-    <item android:title="Item4" />
-    <item android:title="Item5" />
+    <item
+        android:id="@+id/fragment_menu"
+        android:title="Fragment Activity" />
+    <item android:title="View Pager"
+        android:id="@+id/view_pager_menu"/>
 
 </menu>

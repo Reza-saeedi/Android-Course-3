@@ -26,6 +26,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 import ir.gov.siri.app.Contact.ContactActivity;
+import ir.gov.siri.app.Fragment.FragmentActivity;
+import ir.gov.siri.app.ViewPager.ViewPagerActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -51,6 +53,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(intent);
                 }else if(item.getItemId()==R.id.coordinator_menu) {
                     Intent intent = new Intent(MainActivity.this, CoordinatorActivity.class);
+                    startActivity(intent);
+                }else if(item.getItemId()==R.id.fragment_menu) {
+                    Intent intent = new Intent(MainActivity.this, FragmentActivity.class);
+                    startActivity(intent);
+                }else if(item.getItemId()==R.id.view_pager_menu) {
+                    Intent intent = new Intent(MainActivity.this, ViewPagerActivity.class);
                     startActivity(intent);
                 }
                 return false;
