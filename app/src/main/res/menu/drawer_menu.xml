@@ -14,5 +14,9 @@
         android:title="Fragment Activity" />
     <item android:title="View Pager"
         android:id="@+id/view_pager_menu"/>
+    <item android:title="View Pager2"
+        android:id="@+id/view_pager2_menu"/>
+    <item android:title="Browser Activity"
+        android:id="@+id/browser_activity_menu"/>
 
 </menu>

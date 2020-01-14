@@ -55,7 +55,7 @@ public class ViewPagerActivity extends AppCompatActivity {
 
         bazaarViewPagerAdapter.setTabView(getLayoutInflater().from(this),tabLayout);
 
-        viewPager.setCurrentItem(3);
+        viewPager.setCurrentItem(0);
 
         viewPager.setPageTransformer(false,new  viewpagerT());
 

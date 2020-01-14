@@ -9,25 +9,42 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.HashMap;
+
+import ir.gov.siri.app.Fragment.ImageDownloaderFragment;
 import ir.gov.siri.app.Fragment.MyFragment;
 import ir.gov.siri.app.R;
 
-public class BazaarViewPagerAdapter extends FragmentPagerAdapter {
+public class BazaarViewPagerAdapter extends FragmentStatePagerAdapter {
 
     public BazaarViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
+        myFragments=new HashMap<>();
     }
+
+    HashMap<Integer,Fragment> myFragments;
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
+
+
+        if(position==0)
+        {
+            return ImageDownloaderFragment.getInstance();
+        }else
         if(position%2==0)
         {
-            return MyFragment.getInstance("View pager Item :"+position);
+            if(myFragments.get(position)!=null)
+                return myFragments.get(position);
+            MyFragment myFragment=MyFragment.getInstance("View pager Item :"+position);
+            myFragments.put(position,myFragment);
+            return myFragment;
+
         }else
         {
             return ApplicationFragment.getInstance("View pager Item :"+position);
@@ -46,6 +63,11 @@ public class BazaarViewPagerAdapter extends FragmentPagerAdapter {
         return "position :"+position;
     }
 
+
+    @Override
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        //super.destroyItem(container, position, object);
+    }
 
     void setTabView(LayoutInflater inflater, TabLayout tabLayout)
     {
@@ -69,7 +91,6 @@ public class BazaarViewPagerAdapter extends FragmentPagerAdapter {
     {
         TextView textView=tab.getCustomView().findViewById(R.id.tv_tab_item);
         textView.setTextColor(textView.getResources().getColor(R.color.color_white));
-
     }
 
 }

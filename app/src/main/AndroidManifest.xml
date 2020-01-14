@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ir.gov.siri.app">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewPager.ViewPagerActivity"></activity>
+
+
+        <activity android:name=".BrowserActivity"></activity>
+        <activity android:name=".ViewPager2.ViewPager2Activity" />
+        <activity android:name=".ViewPager.ViewPagerActivity" />
         <activity
             android:name=".CoordinatorActivity"
             android:theme="@style/SplashTheme" />
@@ -37,10 +45,11 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-        <activity android:name=".Fragment.FragmentActivity"></activity>
+        <activity android:name=".Fragment.FragmentActivity" />
         <activity
             android:name=".Contact.ContactActivity"
             android:configChanges="orientation|screenSize" />
     </application>
+
 
 </manifest>

@@ -17,6 +17,9 @@
     <string name="Menu">Menu</string>
     <string name="Delete">Delete</string>
     <string name="app_main_activity">Main Activity</string>
+    <string name="Download">Download</string>
+    <string name="a_downloader">Async Downloader</string>
+    <string name="t_downloader">Thread Download</string>
 
     <array name="Dialog_list">
         <item>item 1</item>
