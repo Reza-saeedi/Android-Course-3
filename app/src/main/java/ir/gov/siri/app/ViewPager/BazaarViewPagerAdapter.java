@@ -15,6 +15,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.HashMap;
 
+import ir.gov.siri.app.Fragment.FragmentPreferences;
 import ir.gov.siri.app.Fragment.ImageDownloaderFragment;
 import ir.gov.siri.app.Fragment.MyFragment;
 import ir.gov.siri.app.R;
@@ -37,8 +38,10 @@ public class BazaarViewPagerAdapter extends FragmentStatePagerAdapter {
         {
             return ImageDownloaderFragment.getInstance();
         }else
-        if(position%2==0)
+        if(position==1)
         {
+            return FragmentPreferences.getInstance();
+        }else if(position%3==0){
             if(myFragments.get(position)!=null)
                 return myFragments.get(position);
             MyFragment myFragment=MyFragment.getInstance("View pager Item :"+position);

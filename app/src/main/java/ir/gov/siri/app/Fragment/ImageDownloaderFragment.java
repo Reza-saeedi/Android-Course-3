@@ -1,6 +1,9 @@
 package ir.gov.siri.app.Fragment;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -69,6 +72,16 @@ public class ImageDownloaderFragment extends Fragment implements DownloadDelegat
         imageView.setImageResource(R.mipmap.ic_launcher);
 
 
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M && getContext()!=null)
+        {
+           if( getContext().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED || getContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED)
+           {
+               String[] permissions=new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE};
+              requestPermissions(permissions,1);
+           }
+        }
+
+
 
 
 
@@ -78,6 +91,11 @@ public class ImageDownloaderFragment extends Fragment implements DownloadDelegat
         return view;
     }
 
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
 
     @Override
     public void onImageLoadedInThread(final Bitmap bitmap) {

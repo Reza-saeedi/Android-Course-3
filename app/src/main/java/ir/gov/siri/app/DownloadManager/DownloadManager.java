@@ -1,6 +1,7 @@
 package ir.gov.siri.app.DownloadManager;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
@@ -11,11 +12,15 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import ir.gov.siri.app.FileManager;
 
 public class DownloadManager {
 
@@ -39,12 +44,47 @@ public class DownloadManager {
                     HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                     //httpURLConnection.setRequestMethod("GET");
                     //httpURLConnection.setRequestProperty("header", "value");
+                    SharedPreferences preferences=null;
+                    String imageName="image.png";
+                    if(context!=null) {
+                        preferences = context.getSharedPreferences("SecureData", Context.MODE_PRIVATE);
+                        imageName=preferences.getString("FileName","image.png");
+
+                    }
+                    File myimage=new File(FileManager.getExternalDir(context),imageName);
+
+                    if(myimage.exists())
+                    {
+                        delegate.onImageLoadedInThread(BitmapFactory.decodeFile(myimage.getAbsolutePath()));
+                        return;
+                    }
+
+
+                    FileOutputStream fileOutputStream=new FileOutputStream(myimage);
+
+
                     int response = httpURLConnection.getResponseCode();
                     Bitmap image;
                     if (response == HttpURLConnection.HTTP_OK) {
                         InputStream inputStream=httpURLConnection.getInputStream();
-                        image= BitmapFactory.decodeStream(inputStream);
-                        delegate.onImageLoadedInThread(image);
+                       // image= BitmapFactory.decodeStream(inputStream);
+
+                        //image.compress(Bitmap.CompressFormat.JPEG,50,fileOutputStream);
+
+                        while (true)
+                        {
+                            byte[] readByte=new byte[1024];
+                            int count =inputStream.read(readByte);
+                           if( count==-1)
+                               break;
+                            fileOutputStream.write(readByte,0,count);
+
+                        }
+
+                        fileOutputStream.flush();
+                        fileOutputStream.close();
+
+                       delegate.onImageLoadedInThread(BitmapFactory.decodeFile(myimage.getAbsolutePath()));
                     }
                     Log.e("Android Course Logs", "finish Download :"+response);
 
