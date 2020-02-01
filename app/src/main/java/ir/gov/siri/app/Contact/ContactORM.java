@@ -2,12 +2,18 @@ package ir.gov.siri.app.Contact;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Contact  {
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Generated;
+
+@Entity
+public class ContactORM {
+    @Id
     private long id;
     private String name;
     private String family;
 
-    private ImageUrl url;
+    private String url;
 
 
 
@@ -16,31 +22,23 @@ public class Contact  {
 
 
 
-    public Contact(String name, String family, String phone) {
+
+    @Generated(hash = 1057605855)
+    public ContactORM(long id, String name, String family, String url,
+            String phone) {
+        this.id = id;
         this.name = name;
         this.family = family;
+        this.url = url;
         this.phone = phone;
     }
 
-    public  Contact()
-    {
-
+    @Generated(hash = 1308284861)
+    public ContactORM() {
     }
 
 
-    public ImageUrl getUrl() {
-        return url;
-    }
 
-    public void setUrl(ImageUrl url) {
-        this.url = url;
-    }
-
-    public void setUrl(String url) {
-        ImageUrl imageUrl=new ImageUrl();
-        imageUrl.small=url;
-        this.url = imageUrl;
-    }
 
     public long getId() {
         return id;
@@ -74,14 +72,14 @@ public class Contact  {
         this.phone = phone;
     }
 
-
-    public class  ImageUrl{
-        String small;
-        String large;
-        String names;
-
-        public String getSmall() {
-            return small;
-        }
+    public String getUrl() {
+        return this.url;
     }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+
 }
+

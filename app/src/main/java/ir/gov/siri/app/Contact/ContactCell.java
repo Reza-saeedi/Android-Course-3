@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import ir.gov.siri.app.R;
 
 public class ContactCell extends RecyclerView.ViewHolder {
@@ -42,6 +44,11 @@ public class ContactCell extends RecyclerView.ViewHolder {
     public void setName(String text)
     {
         textViewName.setText(text);
+    }
+
+    public void setImage(String url)
+    {
+        Picasso.get().load(url).error(R.mipmap.ic_launcher).into(imageView);
     }
 
     public void setPhone(String text)

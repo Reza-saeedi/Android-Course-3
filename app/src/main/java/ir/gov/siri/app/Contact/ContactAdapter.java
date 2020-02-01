@@ -76,6 +76,7 @@ public class ContactAdapter extends RecyclerView.Adapter {
                 contactCell.setTag(position + "");
                 contactCell.setName(contacts.get(position).getName()+" "+contacts.get(position).getFamily());
                 contactCell.setPhone(contacts.get(position).getPhone());
+                contactCell.setImage(contacts.get(position).getUrl().small);
                 break;
             default:
                 TextCell textCell = (TextCell) holder;

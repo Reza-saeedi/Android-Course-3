@@ -32,7 +32,7 @@ public class FragmentPreferences extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View root=inflater.inflate(R.layout.prefrences_fragment,container,false);
+        View root=inflater.inflate(R.layout.preferences_fragment,container,false);
 
 
          checkBox=root.findViewById(R.id.cb_my_check_box);
@@ -52,7 +52,7 @@ public class FragmentPreferences extends Fragment {
 
 
 
-        Button save=root.findViewById(R.id.btn_save_prefrence);
+        Button save=root.findViewById(R.id.btn_save_preference);
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override

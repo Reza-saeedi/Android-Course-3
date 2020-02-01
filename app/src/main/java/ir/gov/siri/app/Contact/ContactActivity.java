@@ -15,26 +15,40 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.List;
 
 import ir.gov.siri.app.R;
 
-public class ContactActivity extends AppCompatActivity implements ContactDelegate{
+public class ContactActivity extends AppCompatActivity implements ContactDelegate,ContactManagerDelegate{
     RecyclerView contactList;
     ContactAdapter contactAdapter;
+
+    SwipeRefreshLayout swipeRefreshLayout;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
 
+
+        swipeRefreshLayout=findViewById(R.id.srl_contact);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                ContactManager contactManager=new ContactManager();
+                contactManager.getContactFromDB(ContactActivity.this,ContactActivity.this);
+
+            }
+        });
         contactList=findViewById(R.id.rv_contact);
         contactList.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
         ContactManager contactManager=new ContactManager();
-        List<Contact> contacts= contactManager.getContacts();
 
-        contactAdapter=new ContactAdapter(contacts,this);
-        contactList.setAdapter(contactAdapter);
+
+       contactManager.getContactFromDB(this,this);
+
+
 
 
 
@@ -127,5 +141,14 @@ public class ContactActivity extends AppCompatActivity implements ContactDelegat
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public void onDataLoaded(List<Contact> contacts) {
+        if(contacts!=null) {
+            contactAdapter = new ContactAdapter(contacts, this);
+            contactList.setAdapter(contactAdapter);
+        }
+        swipeRefreshLayout.setRefreshing(false);
     }
 }
