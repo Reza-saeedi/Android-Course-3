@@ -18,6 +18,13 @@
         android:text="Cache Enable"/>
 
 
+    <CheckBox
+        android:id="@+id/cb_DB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enable ORM"/>
+
+
     <Button
         android:id="@+id/btn_save_preference"
         android:layout_width="wrap_content"

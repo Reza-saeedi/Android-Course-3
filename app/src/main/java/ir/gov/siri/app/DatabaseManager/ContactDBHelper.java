@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ir.gov.siri.app.Contact.Contact;
+import ir.gov.siri.app.Contact.ImageUrl;
 
 public class ContactDBHelper {
 
@@ -34,7 +35,9 @@ public class ContactDBHelper {
             contact.setName( cursor.getString(cursor.getColumnIndex(sqliteHelper.ContactName)));
             contact.setPhone( cursor.getString(cursor.getColumnIndex(sqliteHelper.ContactPhone)));
 
-            contact.setUrl( cursor.getString(cursor.getColumnIndex(sqliteHelper.ContactUrl)));
+            ImageUrl imageUrl=new ImageUrl();
+            imageUrl.setSmall(cursor.getString(cursor.getColumnIndex(sqliteHelper.ContactUrl)));
+            contact.setUrl( imageUrl);
             contacts.add(contact);
 
             cursor.moveToNext();

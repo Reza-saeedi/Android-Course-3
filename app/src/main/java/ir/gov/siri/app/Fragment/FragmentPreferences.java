@@ -23,6 +23,7 @@ import ir.gov.siri.app.R;
 public class FragmentPreferences extends Fragment {
 
     CheckBox checkBox;
+    CheckBox checkBoxDB;
     EditText fileName;
 
     public static FragmentPreferences getInstance()
@@ -36,6 +37,7 @@ public class FragmentPreferences extends Fragment {
 
 
          checkBox=root.findViewById(R.id.cb_my_check_box);
+        checkBoxDB=root.findViewById(R.id.cb_DB);
 
          fileName=root.findViewById(R.id.et_file_name);
 
@@ -48,6 +50,7 @@ public class FragmentPreferences extends Fragment {
             preferences = getContext().getSharedPreferences("SecureData", Context.MODE_PRIVATE);
             fileName.setText(preferences.getString("FileName",""));
             checkBox.setChecked(preferences.getBoolean("cacheData",false));
+            checkBoxDB.setChecked(preferences.getBoolean("enableORM",false));
         }
 
 
@@ -65,6 +68,7 @@ public class FragmentPreferences extends Fragment {
                     SharedPreferences.Editor editor=preferences.edit();
                     editor.putString("FileName",text);
                     editor.putBoolean("cacheData",checked);
+                    editor.putBoolean("enableORM",checkBoxDB.isChecked());
                     editor.apply();
 
 

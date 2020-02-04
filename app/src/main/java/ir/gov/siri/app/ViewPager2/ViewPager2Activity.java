@@ -28,7 +28,7 @@ public class ViewPager2Activity extends AppCompatActivity implements ContactDele
         viewPager2=findViewById(R.id.vp_bazaar);
 
         ContactManager contactManager=new ContactManager();
-        List<Contact> contacts= contactManager.getContacts();
+        List<Contact> contacts= contactManager.getContactFromProvider(this);
         bazaarViewPager2Adapter=new BazaarViewpager2Adapter(contacts,this);
         viewPager2.setAdapter(bazaarViewPager2Adapter);
 

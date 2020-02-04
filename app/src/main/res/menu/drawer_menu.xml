@@ -18,5 +18,13 @@
         android:id="@+id/view_pager2_menu"/>
     <item android:title="Browser Activity"
         android:id="@+id/browser_activity_menu"/>
+    <item android:title="Camera Activity"
+        android:id="@+id/camera_activity_menu"/>
+    <item android:title="Video Activity"
+        android:id="@+id/video_activity_menu"/>
+
+    <item android:title="Music Activity"
+        android:id="@+id/Music_activity_menu"/>
+
 
 </menu>

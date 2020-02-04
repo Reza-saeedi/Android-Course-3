@@ -31,6 +31,9 @@ import com.google.android.material.snackbar.Snackbar;
 
 import ir.gov.siri.app.Contact.ContactActivity;
 import ir.gov.siri.app.Fragment.FragmentActivity;
+import ir.gov.siri.app.Media.CameraActivity;
+import ir.gov.siri.app.Media.MusicActivity;
+import ir.gov.siri.app.Media.VideoActivity;
 import ir.gov.siri.app.ViewPager.ViewPagerActivity;
 import ir.gov.siri.app.ViewPager2.ViewPager2Activity;
 
@@ -72,6 +75,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(intent);
                 } else if (item.getItemId() == R.id.browser_activity_menu) {
                     Intent intent = new Intent(MainActivity.this, BrowserActivity.class);
+                    startActivity(intent);
+                }else if (item.getItemId() == R.id.camera_activity_menu) {
+                    Intent intent = new Intent(MainActivity.this, CameraActivity.class);
+                    startActivity(intent);
+                }else if (item.getItemId() == R.id.video_activity_menu) {
+                    Intent intent = new Intent(MainActivity.this, VideoActivity.class);
+                    startActivity(intent);
+                }else if (item.getItemId() == R.id.Music_activity_menu) {
+                    Intent intent = new Intent(MainActivity.this, MusicActivity.class);
                     startActivity(intent);
                 }
                 return false;

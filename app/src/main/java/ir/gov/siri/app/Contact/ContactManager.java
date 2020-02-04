@@ -1,6 +1,9 @@
 package ir.gov.siri.app.Contact;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.provider.ContactsContract;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,40 +20,51 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ContactManager {
 
 
-    public void getContacts(ContactManagerDelegate contactManagerDelegate)
-    {
-      List<Contact> contacts=new ArrayList<>();
-      contacts.add(new Contact("ali","aliF","09122222211"));
-      contacts.add(new Contact("reza","rezaF","09122222233"));
-      contacts.add(new Contact("hasan","hasani","09122222244"));
-      contacts.add(new Contact("amir","amiri","09122222255"));
+    public void getContacts(ContactManagerDelegate contactManagerDelegate) {
+        List<Contact> contacts = new ArrayList<>();
+        contacts.add(new Contact(1L, "ali", "aliF", 1, "09122222211"));
+        contacts.add(new Contact(1L, "reza", "rezaF", 1, "09122222233"));
+        contacts.add(new Contact(1L, "hasan", "hasani", 1, "09122222244"));
+        contacts.add(new Contact(1L, "amir", "amiri", 1, "09122222255"));
 
-        contacts.add(new Contact("ali","aliF","09122222211"));
-        contacts.add(new Contact("reza","rezaF","09122222233"));
-        contacts.add(new Contact("hasan","hasani","09122222244"));
-        contacts.add(new Contact("amir","amiri","09122222255"));
+        contacts.add(new Contact(1L, "ali", "aliF", 1, "09122222211"));
+        contacts.add(new Contact(1L, "reza", "rezaF", 1, "09122222233"));
+        contacts.add(new Contact(1L, "hasan", "hasani", 1, "09122222244"));
+        contacts.add(new Contact(1L, "amir", "amiri", 1, "09122222255"));
         contactManagerDelegate.onDataLoaded(contacts);
     }
 
-    public  List<Contact> getContacts() {
+    public List<Contact> getContacts() {
         List<Contact> contacts = new ArrayList<>();
-        contacts.add(new Contact("ali", "aliF", "09122222211"));
-        contacts.add(new Contact("reza", "rezaF", "09122222233"));
-        contacts.add(new Contact("hasan", "hasani", "09122222244"));
-        contacts.add(new Contact("amir", "amiri", "09122222255"));
-
-        contacts.add(new Contact("ali", "aliF", "09122222211"));
-        contacts.add(new Contact("reza", "rezaF", "09122222233"));
-        contacts.add(new Contact("hasan", "hasani", "09122222244"));
-        contacts.add(new Contact("amir", "amiri", "09122222255"));
+        contacts.add(new Contact(1L, "ali", "aliF", 1, "09122222211"));
+        contacts.add(new Contact(1L, "reza", "rezaF", 1, "09122222233"));
+        contacts.add(new Contact(1L, "hasan", "hasani", 1, "09122222244"));
+        contacts.add(new Contact(1L, "amir", "amiri", 1, "09122222255"));
+        contacts.add(new Contact(1L, "ali", "aliF", 1, "09122222211"));
+        contacts.add(new Contact(1L, "reza", "rezaF", 1, "09122222233"));
+        contacts.add(new Contact(1L, "hasan", "hasani", 1, "09122222244"));
+        contacts.add(new Contact(1L, "amir", "amiri", 1, "09122222255"));
         return (contacts);
     }
 
+    public List<Contact> getContacts(String search) {
+        List<Contact> contacts = new ArrayList<>();
+        if (search.length() % 2 == 0) {
+            contacts.add(new Contact(1L, "ali", "aliF", 1, "09122222211"));
+            contacts.add(new Contact(1L, "reza", "rezaF", 1, "09122222233"));
+            contacts.add(new Contact(1L, "hasan", "hasani", 1, "09122222244"));
+            contacts.add(new Contact(1L, "amir", "amiri", 1, "09122222255"));
+        }
 
+        contacts.add(new Contact(1L, "ali", "aliF", 1, "09122222211"));
+        contacts.add(new Contact(1L, "reza", "rezaF", 1, "09122222233"));
+        contacts.add(new Contact(1L, "hasan", "hasani", 1, "09122222244"));
+        contacts.add(new Contact(1L, "amir", "amiri", 1, "09122222255"));
+        return contacts;
+    }
 
-        public List<Contact> getContactFromNetwork(final ContactManagerDelegate delegate, final Context context)
-    {
-        final List<Contact> contacts=new ArrayList<>();
+    public List<Contact> getContactFromNetwork(final ContactManagerDelegate delegate, final Context context) {
+        final List<Contact> contacts = new ArrayList<>();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.androidhive.info/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -58,15 +72,24 @@ public class ContactManager {
 
         ContactService service = retrofit.create(ContactService.class);
 
-        Call<List<Contact>> call=service.getContacts();
+        Call<List<Contact>> call = service.getContacts();
         call.enqueue(new Callback<List<Contact>>() {
             @Override
             public void onResponse(Call<List<Contact>> call, Response<List<Contact>> response) {
                 delegate.onDataLoaded(response.body());
 
-                if( response.body()!=null) {
+                if (response.body() != null) {
                     for (int i = 0; i < response.body().size(); i++) {
-                        ContactDBHelper.getInstance(context).insertContact(response.body().get(i));
+                        SharedPreferences preferences = context.getSharedPreferences("SecureData", Context.MODE_PRIVATE);
+
+                        if (preferences.getBoolean("enableORM", false)) {
+                            insertContactORM((response.body().get(i)));
+                        } else {
+                            Contact contact=response.body().get(i);
+
+                            ContactDBHelper.getInstance(context).insertContact(response.body().get(i));
+                        }
+
                     }
                 }
 
@@ -77,64 +100,91 @@ public class ContactManager {
                 delegate.onDataLoaded(null);
             }
         });
-        return  contacts;
-    }
-
-
-    public List<Contact> getContacts(String search)
-    {
-        List<Contact> contacts=new ArrayList<>();
-        if(search.length()%2==0) {
-            contacts.add(new Contact("ali", "aliF", "09122222211"));
-            contacts.add(new Contact("reza", "rezaF", "09122222233"));
-            contacts.add(new Contact("hasan", "hasani", "09122222244"));
-            contacts.add(new Contact("amir", "amiri", "09122222255"));
-        }
-
-        contacts.add(new Contact("ali","aliF","09122222211"));
-        contacts.add(new Contact("reza","rezaF","09122222233"));
-        contacts.add(new Contact("hasan","hasani","09122222244"));
-        contacts.add(new Contact("amir","amiri","09122222255"));
         return contacts;
     }
 
 
-    public void getContactFromDB(ContactManagerDelegate delegate,Context context)
-    {
-        ContactDBHelper.getInstance(context).deleteContact(0);
-        List<Contact> contacts=ContactDBHelper.getInstance(context).selectContact();
-        if(contacts==null) {
+    public void getContactFromDB(ContactManagerDelegate delegate, Context context) {
+
+        List<Contact> contacts = null;
+
+        SharedPreferences preferences = context.getSharedPreferences("SecureData", Context.MODE_PRIVATE);
+
+        if (preferences.getBoolean("enableORM", false)) {
+            contacts = getContactFromORM();
+        } else {
+            ContactDBHelper.getInstance(context).deleteContact(0);
+            contacts = ContactDBHelper.getInstance(context).selectContact();
+        }
+
+
+        if (contacts == null || contacts.size()==0) {
             getContactFromNetwork(delegate, context);
             return;
         }
         delegate.onDataLoaded(contacts);
     }
 
-    public void getContactFromORM(Context context)
-    {
+    public List<Contact> getContactFromORM() {
         DaoSession daoSession = ApplicationLoader.getDaoSession();
-        ContactORMDao contactORMDao = daoSession.getContactORMDao();
-        List<ContactORM> joes = contactORMDao.queryBuilder()
-                .where(ContactORMDao.Properties.Name.eq("Joe"))
-                .orderAsc(ContactORMDao.Properties.Phone)
-                .list();
+        ContactDao contactDao = daoSession.getContactDao();
+
+        return  contactDao.loadAll();
+
+        /*return contactDao.queryBuilder()
+                .where(ContactDao.Properties.Name.eq("Joe"))
+                .orderAsc(ContactDao.Properties.Phone)
+                .list();*/
     }
 
-    public void insertContactORM(ContactORM contact)
-    {
+    public void insertContactORM(Contact contact) {
 
         DaoSession daoSession = ApplicationLoader.getDaoSession();
-        ContactORMDao contactORMDao = daoSession.getContactORMDao();
-        contactORMDao.insert(contact);
+        ContactDao contactDao = daoSession.getContactDao();
+
+
+
+        ImageUrlDao imageUrlDao = daoSession.getImageUrlDao();
+        imageUrlDao.insert(contact.getImageUrl());
+
+        contact.setImageId(contact.getImageUrl().getId());
+        contactDao.insert(contact);
     }
 
 
-    public void updateContactORM(ContactORM contact)
-    {
+    public void updateContactORM(Contact contact) {
 
         DaoSession daoSession = ApplicationLoader.getDaoSession();
-        ContactORMDao contactORMDao = daoSession.getContactORMDao();
+        ContactDao contactORMDao = daoSession.getContactDao();
         contactORMDao.update(contact);
+    }
+
+
+    public ArrayList<Contact> getContactFromProvider(Context context)
+    {
+        ArrayList<Contact> contactArrayList=new ArrayList<>();
+
+        Cursor cursor= context.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,null,null,null,null);
+        while (cursor.moveToNext())
+        {
+            Contact contact=new Contact();
+            String name=cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME));
+            String id=cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts._ID));
+            Cursor phoneCursor=context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,null,
+                    ContactsContract.CommonDataKinds.Phone.CONTACT_ID+"= ?",new String[]{id},null);
+            StringBuilder phones=new StringBuilder();
+            while (phoneCursor.moveToNext())
+            {
+                String phone=phoneCursor.getString(phoneCursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                phones.append(phone);
+                phones.append("\n");
+            }
+            contact.setPhone(phones.toString());
+            contact.setName(name);
+            contactArrayList.add(contact);
+        }
+
+        return contactArrayList;
     }
 
 
