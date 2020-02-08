@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "115232466329",
+    "firebase_url": "https://androidcourse3.firebaseio.com",
+    "project_id": "androidcourse3",
+    "storage_bucket": "androidcourse3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:115232466329:android:eac29a2a22c71db3ef5f08",
+        "android_client_info": {
+          "package_name": "ir.gov.siri.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "115232466329-n17128rtn2cp7hs3ljr1pi5t5uo9ti6o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCauQPJ0qRH-NovBmijMFr4LciKvUfGcfQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "115232466329-ak0bu2v374o3g1cg1ceggiak4o4dpgb7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,8 @@ import androidx.core.app.ActivityCompat;
 
 import java.io.IOException;
 
+import ir.gov.siri.app.MusicService;
+
 import static ir.gov.siri.app.Media.AudioPlayer.AUDIO_FILE_NAME;
 
 public class MusicActivity extends AppCompatActivity {
@@ -31,22 +34,24 @@ public class MusicActivity extends AppCompatActivity {
     private RecordButton recordButton = null;
     private MediaRecorder recorder = null;
 
-    private PlayButton   playButton = null;
-    private MediaPlayer   player = null;
+    private PlayButton playButton = null;
+
+
+    private MediaPlayer player = null;
 
     // Requesting permission to RECORD_AUDIO
     private boolean permissionToRecordAccepted = false;
-    private String [] permissions = {Manifest.permission.RECORD_AUDIO};
+    private String[] permissions = {Manifest.permission.RECORD_AUDIO};
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode){
+        switch (requestCode) {
             case REQUEST_RECORD_AUDIO_PERMISSION:
-                permissionToRecordAccepted  = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                permissionToRecordAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                 break;
         }
-        if (!permissionToRecordAccepted ) finish();
+        if (!permissionToRecordAccepted) finish();
 
     }
 
@@ -75,7 +80,7 @@ public class MusicActivity extends AppCompatActivity {
             player.setLooping(true);
             player.prepare();
             player.start();
-            MediaController mediaController=new MediaController(this);
+            MediaController mediaController = new MediaController(this);
             mediaController.setMediaPlayer(new MediaController.MediaPlayerControl() {
                 @Override
                 public void start() {
@@ -164,10 +169,9 @@ public class MusicActivity extends AppCompatActivity {
         recorder = null;
     }
 
-    private void playWithMediaController()
-    {
-        Intent intent=new Intent(this,AudioPlayer.class);
-        intent.putExtra(AUDIO_FILE_NAME,fileName);
+    private void playWithMediaController() {
+        Intent intent = new Intent(this, AudioPlayer.class);
+        intent.putExtra(AUDIO_FILE_NAME, fileName);
         startActivity(intent);
     }
 
@@ -238,6 +242,27 @@ public class MusicActivity extends AppCompatActivity {
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT,
                         0));
+
+        Button openService = new Button(this);
+        openService.setText("play service");
+        openService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MusicActivity.this, MusicService.class);
+                intent.putExtra("url", fileName);
+
+                if (Build.VERSION.SDK_INT > 28)
+                    startForegroundService(intent);
+                else
+                    startService(intent);
+            }
+        });
+        ll.addView(openService,
+                new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        0));
+
         setContentView(ll);
     }
 

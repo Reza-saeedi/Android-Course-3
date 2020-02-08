@@ -37,7 +37,7 @@ public class ContactDBHelper {
 
             ImageUrl imageUrl=new ImageUrl();
             imageUrl.setSmall(cursor.getString(cursor.getColumnIndex(sqliteHelper.ContactUrl)));
-            contact.setUrl( imageUrl);
+            contact.setImageUrl( imageUrl);
             contacts.add(contact);
 
             cursor.moveToNext();
@@ -53,7 +53,7 @@ public class ContactDBHelper {
 
         ContentValues contentValues=new ContentValues();
         contentValues.put(sqliteHelper.ContactName, contact.getName());
-        contentValues.put(sqliteHelper.ContactUrl, contact.getUrl().getSmall());
+        contentValues.put(sqliteHelper.ContactUrl, contact.getImageUrl().getSmall());
         contentValues.put(sqliteHelper.ContactPhone, contact.getPhone());
 
         database.insert(sqliteHelper.ContactTable,null,contentValues);

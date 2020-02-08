@@ -26,5 +26,13 @@
     <item android:title="Music Activity"
         android:id="@+id/Music_activity_menu"/>
 
+    <item android:title="Map  Activity"
+        android:id="@+id/Map_activity_menu"/>
+    <item android:title="SignIn  Activity"
+        android:id="@+id/SignIn_activity_menu"/>
+
+    <item android:title="Sensor  Activity"
+        android:id="@+id/Sensor_activity_menu"/>
+
 
 </menu>

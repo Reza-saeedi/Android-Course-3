@@ -34,7 +34,7 @@ public class AudioPlayer  extends AppCompatActivity implements MediaPlayer.OnPre
 
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setOnPreparedListener(this);
-
+        mediaPlayer.setLooping(true);
         mediaController = new MediaController(this);
 
         try {
@@ -50,9 +50,9 @@ public class AudioPlayer  extends AppCompatActivity implements MediaPlayer.OnPre
     @Override
     protected void onStop() {
         super.onStop();
-        mediaController.hide();
+       /* mediaController.hide();
         mediaPlayer.stop();
-        mediaPlayer.release();
+        mediaPlayer.release();*/
     }
 
     @Override

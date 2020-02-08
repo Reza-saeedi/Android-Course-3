@@ -133,14 +133,19 @@ public class CameraActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                    imageView.setImageBitmap(selectedImage);
+
+                    int height=selectedImage.getHeight()*512/selectedImage.getWidth();
+                    Bitmap photo=Bitmap.createScaledBitmap(selectedImage,512,height,false);
+
+
+                    imageView.setImageBitmap(photo);
 
                 }
             }else if(REQUEST_IMAGE==requestCode)
             {
                 Uri uri = null;
                 String path = null;
-                Bitmap photo = null;
+                Bitmap selectedImage = null;
                 if (data != null) {
                     uri = data.getData();
                     path = getRealPathFromURI(uri);
@@ -150,8 +155,11 @@ public class CameraActivity extends AppCompatActivity {
                     path = uri.getPath();
                 }
                 File imgFile = new File(path);
-                photo = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                imageView.setImageBitmap(photo);
+                selectedImage = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+
+              /*  int height=selectedImage.getHeight()*512/selectedImage.getWidth();
+                Bitmap photo=Bitmap.createScaledBitmap(selectedImage,512,height,false);*/
+                imageView.setImageBitmap(selectedImage);
             }
         }
 

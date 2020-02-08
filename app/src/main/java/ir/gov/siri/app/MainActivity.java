@@ -31,9 +31,12 @@ import com.google.android.material.snackbar.Snackbar;
 
 import ir.gov.siri.app.Contact.ContactActivity;
 import ir.gov.siri.app.Fragment.FragmentActivity;
+import ir.gov.siri.app.GoogleService.DirectionActivity;
+import ir.gov.siri.app.GoogleService.SignInActivity;
 import ir.gov.siri.app.Media.CameraActivity;
 import ir.gov.siri.app.Media.MusicActivity;
 import ir.gov.siri.app.Media.VideoActivity;
+import ir.gov.siri.app.Sensor.SensorActivity;
 import ir.gov.siri.app.ViewPager.ViewPagerActivity;
 import ir.gov.siri.app.ViewPager2.ViewPager2Activity;
 
@@ -84,6 +87,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(intent);
                 }else if (item.getItemId() == R.id.Music_activity_menu) {
                     Intent intent = new Intent(MainActivity.this, MusicActivity.class);
+                    startActivity(intent);
+                }else if (item.getItemId() == R.id.Map_activity_menu) {
+                    Intent intent = new Intent(MainActivity.this, DirectionActivity.class);
+                    startActivity(intent);
+                }else if (item.getItemId() == R.id.SignIn_activity_menu) {
+                    Intent intent = new Intent(MainActivity.this, SignInActivity.class);
+                    startActivity(intent);
+                }else if (item.getItemId() == R.id.Sensor_activity_menu) {
+                    Intent intent = new Intent(MainActivity.this, SensorActivity.class);
                     startActivity(intent);
                 }
                 return false;

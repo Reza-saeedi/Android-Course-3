@@ -83,6 +83,10 @@ public class Contact {
         return this.imageId;
     }
 
+    public void setImageUrl(ImageUrl url){
+        this.url=url;
+    }
+
 
     public void setImageId(long imageId) {
         this.imageId = imageId;
